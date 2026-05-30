@@ -13,6 +13,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
+  baseURL: "https://api.groq.com/openai/v1",
 });
 
 // ─── Aditya's Core Identity ──────────────────────────────────────────────────
@@ -61,7 +62,7 @@ app.post("/api/chat", async (req, res) => {
     ];
 
     const completion = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
+      model: "llama-3.3-70b-versatile",
       messages,
       temperature: 0.75,
       max_tokens: 300,
